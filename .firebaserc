@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "meal-randomizer": {
+      "hosting": {
+        "ang-mat-tut": [
+          "meal-randomizer"
+        ]
+      }
+    }
+  }
+}

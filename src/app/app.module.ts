@@ -6,6 +6,12 @@ import { AppComponent } from './app.component';
 import { SharedModule } from "./shared/shared.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -15,11 +21,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  
-}
+export class AppModule {}
