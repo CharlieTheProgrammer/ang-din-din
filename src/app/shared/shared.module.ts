@@ -15,7 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShellComponent } from './shell/shell.component';
 import { LoginButtonComponent } from './login-button/login-button.component';
 
@@ -38,7 +38,8 @@ const modules=[
   MatInputModule,
   MatSnackBarModule,
   MatAutocompleteModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  FormsModule
 ];
 
 
