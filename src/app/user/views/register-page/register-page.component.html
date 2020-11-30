@@ -1,27 +1,29 @@
-<div class="w-full min-h-full lg:w-1/2 xl:w-2/5 md:h-auto">
+<div
+  class="w-full min-h-full lg:w-1/2 xl:w-2/5 md:h-auto"
+>
   <mat-card
-    class="relative z-30 max-w-md mx-auto shadow-2xl bg-white md:rounded-lg h-full md:h-auto"
+    class="relative z-30 max-w-md mx-auto shadow-md bg-white md:rounded-lg h-full md:h-auto"
   >
     <div class="p-2 lg:p-4">
       <div class="flex items-baseline justify-between">
-        <mat-card-title>Login</mat-card-title>
+        <mat-card-title>Register</mat-card-title>
         <a
-          routerLink="/user/register"
+          routerLink="/user/login"
           class="text-sm text-right text-gray-500 hover:text-gray-700"
-          title="Create new account"
-          >Register</a
+          title="Login with existing account"
+          >Login</a
         >
       </div>
       <mat-card-subtitle
-        >With your valid account to continue
+        >To access all our amazing features!
       </mat-card-subtitle>
       <mat-card-content>
         <form [formGroup]="form" class="mt-6 lg:mt-8" (ngSubmit)="onSubmit()">
           <div>
             <span class="text-red-500 text-xs" *ngIf="serverError"
-              >Your login information was not recognized.
+              >{{ serverError }}.
             </span>
-
+  
             <mat-form-field appearance="outline" class="w-full">
               <mat-label> Email </mat-label>
               <input
@@ -30,14 +32,14 @@
                 formControlName="username"
                 name="username"
                 id="username"
-                placeholder=""
+                placeholder="Email"
                 required
               />
               <mat-error *ngIf="username.invalid && username.dirty">
                 Please enter a valid email.
               </mat-error>
             </mat-form-field>
-
+  
             <mat-form-field appearance="outline" class="w-full">
               <mat-label> Password </mat-label>
               <input
@@ -46,7 +48,7 @@
                 formControlName="password"
                 name="password"
                 id="password"
-                placeholder="password"
+                placeholder="Password"
                 required
               />
               <mat-error *ngIf="password.invalid && password.dirty">
@@ -54,17 +56,32 @@
               </mat-error>
             </mat-form-field>
 
+            <mat-form-field appearance="outline" class="w-full">
+              <mat-label> Confirm Password </mat-label>
+              <input
+                matInput
+                [errorStateMatcher]="confirmPassword"
+                type="password"
+                formControlName="passwordConfirm"
+                name="passwordConfirm"
+                id="passwordConfirm"
+                placeholder="Confirm Password"
+                required
+              />
+              <mat-error class="" *ngIf="passwordConfirm.dirty && form.hasError('mismatch')">
+                Confirm password must match password.
+              </mat-error>
+            </mat-form-field>
             <div class="mt-3">
               <button
-                *ngIf="!loading"
+              *ngIf="!loading"
                 type="submit"
                 mat-raised-button
-                color="primary"
                 [disabled]="form.invalid"
+                color="primary"
                 class="w-full inline-flex items-center justify-center rounded-lg overflow-hidden px-4 py-3 text-white transition ease-out duration-300 focus:outline-none"
               >
                 Continue
-                <!-- <span *ngIf="!loading">Continue</span> -->
               </button>
               <div *ngIf="loading">
                 <mat-spinner

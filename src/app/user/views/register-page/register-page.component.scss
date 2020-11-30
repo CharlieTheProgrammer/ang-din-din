@@ -1,0 +1,9 @@
+:host {
+  @apply flex flex-1 justify-center min-h-full
+}
+
+@screen md {
+  :host {
+    @apply items-center
+  }
+}

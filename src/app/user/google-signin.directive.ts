@@ -13,7 +13,13 @@ export class GoogleSigninDirective {
   // html element that has the click event. The alternative is adding the click directly
   // into the parent component, but then at that point the logic wouldn't be centralized.
   @HostListener('click')
-  onClick() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  async onClick() {
+    try {
+      let stuff = await this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      console.log(stuff);
+    } catch (error) {
+      // Do nothing
+      // console.log('caught error', error);
+    }
   }
 }
