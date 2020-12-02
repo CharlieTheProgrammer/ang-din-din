@@ -19,13 +19,16 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShellComponent } from './shell/shell.component';
 import { LoginButtonComponent } from './login-button/login-button.component';
+import { LogoutButtonComponent } from './logout-button/logout-button.component';
 
 const components=[
   ShellComponent, 
-  LoginButtonComponent
+  LoginButtonComponent,
+  LogoutButtonComponent
 ];
 
 const modules=[
+  CommonModule,
   MatButtonModule,
   MatToolbarModule,
   MatIconModule,

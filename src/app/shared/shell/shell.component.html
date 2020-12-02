@@ -16,9 +16,12 @@
           <a routerLink="/dashboard">Dashboard</a>
         </div>
   
-        <button mat-raised-button color="primary">Login</button>
-        <a routerLink="/">Login</a>
-        <a routerLink="/">Logout</a>
+        <div *ngIf="!isAuthenticated">
+          <app-login-button></app-login-button>
+        </div>
+        <div *ngIf="isAuthenticated">
+          <app-logout-button></app-logout-button>
+        </div>
       </nav>
   </header>
 
