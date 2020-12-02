@@ -10,7 +10,10 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dash/dash.module').then((m) => m.DashModule),
+    // This one controls whether  specific route can be accessed.
     canActivate: [AuthGuard],
+    // This one controls whether a route and its children can be accessed
+    // canLoad: [AuthGuard]
   },
 ];
 
