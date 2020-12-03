@@ -11,9 +11,13 @@ import { Router } from '@angular/router';
 export class LoginPageComponent implements OnInit {
   loading: boolean = false;
   form: FormGroup;
-  serverError: String = ''
+  serverError: String = '';
 
-  constructor(private fb: FormBuilder, private auth: AngularFireAuth, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private auth: AngularFireAuth,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -34,7 +38,10 @@ export class LoginPageComponent implements OnInit {
     this.loading = true;
     // login using firebase login with email and password
     try {
-      await this.auth.signInWithEmailAndPassword(this.username.value, this.password.value)
+      await this.auth.signInWithEmailAndPassword(
+        this.username.value,
+        this.password.value
+      );
       this.router.navigateByUrl('/dashboard');
     } catch (error) {
       this.serverError = error.message;
