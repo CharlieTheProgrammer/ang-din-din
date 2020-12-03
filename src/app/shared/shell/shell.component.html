@@ -1,28 +1,35 @@
 <div class="flex flex-col min-h-screen bg-gray-100">
   <header class="shadow-md">
-      <nav class="flex justify-between items-center py-2">
-        <div class="flex items-center">
-          <div class="cursor-pointer md:hidden">
-            <svg
-              class="h-2 w-2 text-teal-600"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </div>
-          <a routerLink="/dashboard">Dashboard</a>
+    <nav class="flex justify-between items-center py-2">
+      <div class="flex items-center">
+        <div class="cursor-pointer md:hidden">
+          <svg
+            class="h-2 w-2 text-teal-600"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
         </div>
-  
-        <div *ngIf="!isAuthenticated">
-          <app-login-button></app-login-button>
-        </div>
-        <div *ngIf="isAuthenticated">
-          <app-logout-button></app-logout-button>
-        </div>
-      </nav>
+        <a routerLink="/" class="ml-2 font-bold font-serif text-teal-600"
+          >DinDin</a
+        >
+      </div>
+
+      <div *ngIf="!isAuthenticated">
+        <app-login-button></app-login-button>
+      </div>
+      <div *ngIf="isAuthenticated">
+        <app-logout-button></app-logout-button>
+      </div>
+    </nav>
   </header>
 
   <!-- Main content will go here -->
@@ -31,6 +38,8 @@
   </div>
 
   <footer class="flex justify-center py-2 text-sm text-teal-500">
-    <a href="https://charlietheprogrammer.com" target="_blank">@ Charlie the Programmer</a>
+    <a href="https://charlietheprogrammer.com" target="_blank"
+      >@ Charlie the Programmer</a
+    >
   </footer>
 </div>
