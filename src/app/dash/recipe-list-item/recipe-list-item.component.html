@@ -1,0 +1,65 @@
+<div class="px-6 mt-4">
+  <div
+    class="bg-white border-2 border-teal-600 p-4 rounded-lg shadow-md hover:text-white hover:bg-teal-600"
+  >
+    <div class="flex mb-2">
+      <div class="font-semibold text-xl leading-tight truncate mt-1 pr-4">
+        <a 
+          [routerLink]="['/dashboard/recipes', recipe.id]"
+        >
+          {{ recipe.name }}
+        </a>
+      </div>
+
+      <!-- Red circle with x -->
+      <div class="self-end ml-auto" *ngIf="!isRecipeItemRoute">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="h-6 w-6 ml-4 cursor-pointer text-red-600"
+          title="Delete Recipe"
+          (click)="deleteRecipe(recipe.id)"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+      <!-- Icon to go back -->
+      <div class="self-end ml-auto" *ngIf="isRecipeItemRoute">
+        <a routerLink="/dashboard/recipes">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="h-6 w-6 ml-4 cursor-pointer text-secondary"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M10 18a8 8 0 100-16 8 8 0 000 16zm.707-10.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L9.414 11H13a1 1 0 100-2H9.414l1.293-1.293z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="flex flex-col" *ngIf="isRecipeItemRoute">
+      <editor
+        apiKey="wd2sk0yf3fbbvavk1rinphfikvlv1ubesrnyv4q0u153nl4z"
+        [init]="{
+          height: 250,
+          menubar: false,
+          plugins: ['advlist autolink lists link'],
+          toolbar:
+            'undo redo | formatselect | bold italic backcolor | \
+            alignleft aligncenter alignright alignjustify | \
+            bullist numlist outdent indent | removeformat'
+        }"
+        [(ngModel)]="recipe.note"
+      ></editor>
+    </div>
+  </div>
+</div>
