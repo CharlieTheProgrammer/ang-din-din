@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Recipe } from './recipe.model';
-import { switchMap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -35,12 +35,14 @@ export class RecipeService {
       // switchMap will cancel the subscription after it's passed through pipe
       switchMap((user) => {
         if (user) {
-          return this.db
-            .collection<Recipe>('recipe', (ref) =>
-              ref.where('user_id', '==', user.uid)
-            )
-            // This unintuitively named function adds the doc id as 'id'
-            .valueChanges({ idField: 'id' });
+          return (
+            this.db
+              .collection<Recipe>('recipe', (ref) =>
+                ref.where('user_id', '==', user.uid)
+              )
+              // This unintuitively named function adds the doc id as 'id'
+              .valueChanges({ idField: 'id' })
+          );
         } else {
           return [];
         }
@@ -49,6 +51,19 @@ export class RecipeService {
   }
 
   getRecipe(recipeId) {
-    return this.Recipes.doc(recipeId).get();
+    return this.Recipes.doc(recipeId)
+      .snapshotChanges()
+      .pipe(
+        map((doc) => {
+          if (doc.payload.exists) {
+            const data = doc.payload.data() as Recipe;
+            const payloadId = doc.payload.id;
+            return {
+              id: payloadId,
+              ...data,
+            };
+          }
+        })
+      );
   }
 }
