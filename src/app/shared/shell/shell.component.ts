@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Subscription } from 'rxjs';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-shell',
@@ -11,7 +12,7 @@ export class ShellComponent implements OnInit {
   isAuthenticated: boolean = false;
   authSub: Subscription;
 
-  constructor(private auth: AngularFireAuth) {}
+  constructor(private auth: AngularFireAuth, public loadingService: LoadingService) {}
 
   ngOnInit(): void {
     // authState is an observable that is triggered when the user logs in or out. 

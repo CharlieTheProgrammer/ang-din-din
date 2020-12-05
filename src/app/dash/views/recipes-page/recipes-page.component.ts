@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LoadingService } from 'src/app/services/loading.service';
 import { Recipe } from '../../recipe.model';
 import { RecipeService } from '../../recipe.service';
 
@@ -7,12 +9,21 @@ import { RecipeService } from '../../recipe.service';
   templateUrl: './recipes-page.component.html',
   styleUrls: ['./recipes-page.component.scss']
 })
-export class RecipesPageComponent implements OnInit {
+export class RecipesPageComponent implements OnInit, OnDestroy {
   recipes: Recipe[];
+  sub: Subscription;
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService, public ls: LoadingService) { }
 
   ngOnInit(): void {
-    this.recipeService.getUserRecipes().subscribe(recipes => this.recipes = recipes);
+    this.ls.isLoading = true;
+    this.sub = this.recipeService.getUserRecipes().subscribe(recipes => {
+      this.recipes = recipes;
+      this.ls.isLoading = false;
+    });
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
